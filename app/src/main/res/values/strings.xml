@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">TellCom</string>
+
+    <string name="email">E-mail</string>
+    <string name="password">Senha</string>
+    <string name="login_goole">Entrar com Conta Google</string>
+    <string name="login">Entrar</string>
+    <string name="forget_password">Esqueci a senha</string>
+    <string name="register">Cadastrar-se</string>
+
+    <string name="provider_name">Nome do Provedor:</string>
+
+    <string name="score">Score</string>
+    <string name="current_score">0</string>
+    <string name="score_title">Configuração de Score</string>
+    <string name="points_per_execution">Digite o valor de pontos por cada instalação concluída:</string>
+    <string name="meta_score">Digite sua meta de pontos desejada:</string>
+    <string name="score_number">0,0</string>
+    <string name="meta">Meta:</string>
+    <string name="points">Pontos:</string>
+
+    <string name="btn_save">Salvar</string>
+    <string name="no_orders">Você não tem nenhuma Ordem de Serviço Registrada!</string>
+    <string name="from_order_title">Nova Ordem de serviço</string>
+    <string name="from_order_warning">Preencha todos os campos para registrar o serviço</string>
+    <string name="from_order_name">Digite o nome do cliente:</string>
+    <string name="from_order_drop">Digite a quantidade de Drop usado:</string>
+    <string name="from_order_protocol_number">Digite o número do protocolo:</string>
+    <string name="from_order_city">Digite a cidade:</string>
+
+    <string name="protocol_name">Protocolo: </string>
+    <string name="client_name">Cliente: </string>
+    <string name="drop_meters">Drop usado: </string>
+    <string name="drop_meters_word">m</string>
+
+</resources>
