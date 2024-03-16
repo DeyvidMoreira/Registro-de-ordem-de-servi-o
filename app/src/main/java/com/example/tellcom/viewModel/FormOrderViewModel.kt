@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.tellcom.service.constants.Constants
 import com.example.tellcom.service.model.OrderModel
 import com.example.tellcom.service.repository.OrderDatabase
 import kotlinx.coroutines.Dispatchers
@@ -35,7 +36,8 @@ class FormOrderViewModel(application: Application) : AndroidViewModel(applicatio
                     _isOrderSaved.postValue(true)
                 } catch (e: Exception) {
                     _isOrderSaved.postValue(false)
-                    Log.e("FormOrderViewModel", "Falha ao salvar a ordem: ${e.message}")
+                    Log.e("${Constants.NOTIFICATION.SAVE_ERROR_TAG}",
+                        "${Constants.NOTIFICATION.SAVE_ERROR_MESSAGE} ${e.message}")
                 }
                 _isOrderSaved.postValue(false)
             }
@@ -47,6 +49,9 @@ class FormOrderViewModel(application: Application) : AndroidViewModel(applicatio
         GlobalScope.launch (Dispatchers.IO) {
             try {
                 orderDao.update(order)
+            }catch (e:Exception){
+                Log.e("${Constants.NOTIFICATION.UPDATE_ERROR_TAG}",
+                    "${Constants.NOTIFICATION.UPDATE_ERROR_MESSAGE} ${e.message}")
             }
         }
     }

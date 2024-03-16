@@ -33,4 +33,9 @@
     <string name="drop_meters">Drop usado: </string>
     <string name="drop_meters_word">m</string>
 
+    <string name="save_error_tag">SaveError</string>
+    <string name="save_error_message">Save Error</string>
+    <string name="update_error_tag">UpdateError</string>
+    <string name="update_error_message">Update Error</string>
+
 </resources>
