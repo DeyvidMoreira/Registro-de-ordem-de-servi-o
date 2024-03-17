@@ -7,7 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.tellcom.service.constants.Constants
 import com.example.tellcom.service.model.OrderModel
-import com.example.tellcom.service.repository.OrderDatabase
+import com.example.tellcom.service.repository.local.OrderDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -36,8 +36,8 @@ class FormOrderViewModel(application: Application) : AndroidViewModel(applicatio
                     _isOrderSaved.postValue(true)
                 } catch (e: Exception) {
                     _isOrderSaved.postValue(false)
-                    Log.e("${Constants.NOTIFICATION.SAVE_ERROR_TAG}",
-                        "${Constants.NOTIFICATION.SAVE_ERROR_MESSAGE} ${e.message}")
+                    Log.e("${Constants.NOTIFICATION.SAVE_ORDER_ERROR_TAG}",
+                        "${Constants.NOTIFICATION.SAVE_ORDER_ERROR_MESSAGE} ${e.message}")
                 }
                 _isOrderSaved.postValue(false)
             }
@@ -50,8 +50,8 @@ class FormOrderViewModel(application: Application) : AndroidViewModel(applicatio
             try {
                 orderDao.update(order)
             }catch (e:Exception){
-                Log.e("${Constants.NOTIFICATION.UPDATE_ERROR_TAG}",
-                    "${Constants.NOTIFICATION.UPDATE_ERROR_MESSAGE} ${e.message}")
+                Log.e("${Constants.NOTIFICATION.UPDATE_ORDER_ERROR_TAG}",
+                    "${Constants.NOTIFICATION.UPDATE_ORDER_ERROR_MESSAGE} ${e.message}")
             }
         }
     }

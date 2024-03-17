@@ -11,6 +11,7 @@
     <string name="provider_name">Nome do Provedor:</string>
 
     <string name="score">Score</string>
+    <string name="job_name">Provedor</string>
     <string name="current_score">0</string>
     <string name="score_title">Configuração de Score</string>
     <string name="points_per_execution">Digite o valor de pontos por cada instalação concluída:</string>

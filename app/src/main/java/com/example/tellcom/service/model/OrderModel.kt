@@ -6,7 +6,7 @@ import com.example.tellcom.service.constants.Constants
 
 
 
-@Entity(tableName = Constants.DATABASE.DATABASE_NAME)
+@Entity(tableName = Constants.DATABASE.DATABASE_ORDER_NAME)
 data class OrderModel(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,

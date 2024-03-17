@@ -1,4 +1,4 @@
-package com.example.tellcom.service.repository
+package com.example.tellcom.service.repository.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
