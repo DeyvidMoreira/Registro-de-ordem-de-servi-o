@@ -1,7 +1,6 @@
 package com.example.tellcom.view
 
 import android.content.Intent
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -9,12 +8,8 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.telecom.databinding.ActivityOrderBinding
-import com.example.tellcom.service.constants.Constants
 import com.example.tellcom.view.adapter.OrderAdapter
 import com.example.tellcom.viewModel.FormOrderViewModel
-import com.example.tellcom.service.model.OrderModel
-import com.example.tellcom.service.model.OrderStatus
-
 class OrderActivity : AppCompatActivity(), View.OnClickListener, OrderAdapter.OrderItemListener {
     private lateinit var binding: ActivityOrderBinding
     private lateinit var orderAdapter: OrderAdapter
@@ -49,23 +44,21 @@ class OrderActivity : AppCompatActivity(), View.OnClickListener, OrderAdapter.Or
     override fun onDoneClicked(position: Int, isDoneClicked: Boolean) {
         val order = orderAdapter.getOrderAtPosition(position)
         order?.let {
-            it.orderStatus = OrderStatus.DONE
-            orderViewModel.updateOrder(it)
+            //TODO IMPLEMENTAR A LOGICA DE ORDEM FEITA...
         }
         val message = if (isDoneClicked) "Done clicked" else "Not Done clicked"
         Toast.makeText(this, "$message at position $position", Toast.LENGTH_SHORT).show()
-        updateCardViewColor(position, isDoneClicked)
+
     }
 
     override fun onNotDoneClicked(position: Int, isDoneClicked: Boolean) {
         val order = orderAdapter.getOrderAtPosition(position)
         order?.let {
-            it.orderStatus = OrderStatus.NOT_DONE
-            orderViewModel.updateOrder(it)
+            //TODO IMPLEMENTAR A LOGICA DE ORDEM NÃO REALIZADA...
         }
         val message = if (isDoneClicked) "Done clicked" else "Not Done clicked"
         Toast.makeText(this, "$message at position $position", Toast.LENGTH_SHORT).show()
-        updateCardViewColor(position, isDoneClicked)
+
     }
 
     private fun noneListText() {
@@ -87,11 +80,4 @@ class OrderActivity : AppCompatActivity(), View.OnClickListener, OrderAdapter.Or
         binding.fabAddOrder.setOnClickListener(this)
     }
 
-    private fun updateCardViewColor(position: Int, isDoneClicked: Boolean) {
-        val viewHolder =
-            binding.rvOrders.findViewHolderForAdapterPosition(position) as? OrderAdapter.OrderViewHolder
-        viewHolder?.let {
-            it.updateCardViewColor(isDoneClicked)
-        }
-    }
 }

@@ -1,15 +1,12 @@
 package com.example.tellcom.view.adapter
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.telecom.R
 import com.example.telecom.databinding.RowOrderBinding
 import com.example.tellcom.service.model.OrderModel
-import com.example.tellcom.service.model.OrderStatus
 
 class OrderAdapter(private var orders: List<OrderModel>, private val listener: OrderItemListener) :
     RecyclerView.Adapter<OrderAdapter.OrderViewHolder>() {
@@ -18,14 +15,6 @@ class OrderAdapter(private var orders: List<OrderModel>, private val listener: O
     inner class OrderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         internal val binding = RowOrderBinding.bind(itemView)
-
-        private val colorDone = ContextCompat.getColor(itemView.context, R.color.green)
-        private val colorNotDone = ContextCompat.getColor(itemView.context, R.color.red)
-        private val colorInProgress = ContextCompat.getColor(itemView.context, R.color.white)
-
-        private val colorGreen = ContextCompat.getColor(itemView.context, R.color.green)
-        private val colorRed = ContextCompat.getColor(itemView.context, R.color.red)
-        private val colorWhite = ContextCompat.getColor(itemView.context, R.color.white)
 
         fun bind(order: OrderModel, position: Int) {
             binding.tvProtocolNumer.text = order.protocolNumber
@@ -40,18 +29,9 @@ class OrderAdapter(private var orders: List<OrderModel>, private val listener: O
                 listener.onNotDoneClicked(position, false)
             }
 
-            // Define a cor da CardView com base no estado do item
-            updateCardViewColor(order.isDone)
         }
 
-        fun updateCardViewColor(ordersStatus: OrderStatus) {
-            val color = when (ordersStatus) {
-                OrderStatus.DONE -> colorDone
-                OrderStatus.NOT_DONE -> colorNotDone
-                OrderStatus.IN_PROGRESS -> colorInProgress
-            }
-            binding.cvRowOrder.setCardBackgroundColor(color)
-        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderViewHolder {

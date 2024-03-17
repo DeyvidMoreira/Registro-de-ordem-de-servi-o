@@ -3,14 +3,8 @@ package com.example.tellcom.service.constants
 class Constants private constructor() {
 
     object DATABASE {
-        const val VERSION_DATABASE = 5
+        const val VERSION_DATABASE = 6
         const val DATABASE_NAME = "orders_database"
-    }
-
-    object ENTETY {
-        const val PRIMARY_ID = 1
-        const val ORDER_COMPLETE = true
-        const val ORDER_BROKEN = false
     }
 
     object NOTIFICATION {
@@ -27,10 +21,5 @@ class Constants private constructor() {
         const val UPDATE_ERROR_MESSAGE = "Falha ao atualizar as ordens!"
     }
 
-    object NAVIGATION {
-        const val CARD_VIEW_NOT_CLICKED = 1
-        const val DONE_CLICKED = 2
-        const val NOT_DONE_CLICKED = 3
-    }
 
 }
