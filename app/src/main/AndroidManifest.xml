@@ -28,10 +28,10 @@
             android:name="com.example.tellcom.view.LoginActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.tellcom.view.MainActivity"
+            android:name="com.example.tellcom.view.ScoreActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.tellcom.view.ScoreActivity"
+            android:name="com.example.tellcom.view.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

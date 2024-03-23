@@ -85,21 +85,21 @@
                 android:layout_below="@id/tv_order_name"
                 android:layout_toEndOf="@id/tv_drop_value"/>
 
-            <ImageView
-                android:id="@+id/iv_done"
+            <CheckBox
+                android:id="@+id/cb_done"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/verifica"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"/>
-            <ImageView
-                android:id="@+id/iv_not_done"
+            <CheckBox
+                android:id="@+id/cb_broken"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/rejeitado"
                 android:paddingTop="6dp"
                 android:layout_alignParentEnd="true"
-                android:layout_below="@id/iv_done"/>
+                android:layout_below="@id/cb_done"/>
 
         </RelativeLayout>
 

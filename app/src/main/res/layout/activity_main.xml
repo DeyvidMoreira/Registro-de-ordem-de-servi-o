@@ -4,15 +4,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     tools:context="com.example.tellcom.view.MainActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:text="MENU"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_orders"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ordens"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_new_order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+ ordem"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_orders"
+        app:layout_constraintEnd_toStartOf="@id/btn_score"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="score"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_new_order"
+        app:layout_constraintEnd_toStartOf="@id/btn_new_score"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_new_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+ score"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_score"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

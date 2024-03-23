@@ -41,25 +41,30 @@ class OrderActivity : AppCompatActivity(), View.OnClickListener, OrderAdapter.Or
         }
     }
 
-    override fun onDoneClicked(position: Int, isDoneClicked: Boolean) {
+    override fun onDoneClicked(position: Int, isChecked: Boolean) {
         val order = orderAdapter.getOrderAtPosition(position)
         order?.let {
-            //TODO IMPLEMENTAR A LOGICA DE ORDEM FEITA...
+            it.status = 1
+            orderAdapter.notifyItemChanged(position)
         }
-        val message = if (isDoneClicked) "Done clicked" else "Not Done clicked"
+        val message = if (isChecked) "Done clicked" else "Not Done clicked"
         Toast.makeText(this, "$message at position $position", Toast.LENGTH_SHORT).show()
 
     }
 
-    override fun onNotDoneClicked(position: Int, isDoneClicked: Boolean) {
-        val order = orderAdapter.getOrderAtPosition(position)
-        order?.let {
-            //TODO IMPLEMENTAR A LOGICA DE ORDEM NÃO REALIZADA...
-        }
-        val message = if (isDoneClicked) "Done clicked" else "Not Done clicked"
-        Toast.makeText(this, "$message at position $position", Toast.LENGTH_SHORT).show()
+    override fun onNotDoneClicked(position: Int, isChecked: Boolean) {
+         val order = orderAdapter.getOrderAtPosition(position)
+         order?.let {
+             it.status = 2
+             orderAdapter.notifyItemChanged(position)
+         }
+        val message = if (isChecked) "Done clicked" else "Not Done clicked"
+         Toast.makeText(this,
+             "$message at position $position",
+             Toast.LENGTH_SHORT)
+             .show()
 
-    }
+     }
 
     private fun noneListText() {
         binding.tvNoOrder.visibility = if (orderAdapter.itemCount == 0) View.VISIBLE else View.GONE

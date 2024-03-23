@@ -1,8 +1,10 @@
 package com.example.tellcom.view.adapter
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.telecom.R
 import com.example.telecom.databinding.RowOrderBinding
@@ -22,15 +24,52 @@ class OrderAdapter(private var orders: List<OrderModel>, private val listener: O
             binding.tvDropValue.text = order.dropValue
             binding.tvDropMeasure.text = "M"
 
-            binding.ivDone.setOnClickListener {
-                listener.onDoneClicked(position, true)
+            // Definir a cor de fundo com base no status
+            when (order.status) {
+                1 -> binding.cvRowOrder.setBackgroundColor(Color.GREEN)
+                2 -> binding.cvRowOrder.setBackgroundColor(Color.RED)
+                else -> binding.cvRowOrder.setBackgroundColor(Color.WHITE)
             }
-            binding.ivNotDone.setOnClickListener {
-                listener.onNotDoneClicked(position, false)
+
+            //Configurar listener para cbDone
+            binding.cbDone.setOnCheckedChangeListener(null)
+            binding.cbDone.isChecked = order.status == 1
+            binding.cbDone.setOnCheckedChangeListener { _, isChecked ->
+                // Marcar como Feito (1) ou Andamento (3)
+                order.status= if(isChecked) 1 else 3
+                notifyDataSetChanged()
             }
+            //Configurar listener para cdBroken
+            binding.cbBroken.setOnCheckedChangeListener(null)
+            binding.cbBroken.isChecked = order.status == 2
+            binding.cbBroken.setOnCheckedChangeListener { _, isChecked ->
+                order.status = if (isChecked) 2 else 3
+                notifyDataSetChanged()
+            }
+
+
+            /*
+                    binding.cbDone.setOnClickListener {
+                        if (binding.cbDone.isChecked) {
+                            listener.onDoneClicked(position, true)
+                            binding.cvRowOrder.background
+                        }
+                    }
+
+                    binding.cbBroken.setOnClickListener {
+                        if (binding.cbBroken.isChecked) {
+                            listener.onNotDoneClicked(position, false)
+                        }
+                    }
+
+                    if (order.checked) {
+                        binding.cvRowOrder.setBackgroundColor(Color.GREEN)
+                    } else {
+                        binding.cvRowOrder.setBackgroundColor(Color.WHITE)
+                    }
+                */
 
         }
-
 
     }
 
@@ -62,7 +101,7 @@ class OrderAdapter(private var orders: List<OrderModel>, private val listener: O
 
     // Interface que a Activity irá implementar
     interface OrderItemListener {
-        fun onDoneClicked(position: Int, isDoneClicked: Boolean)
-        fun onNotDoneClicked(position: Int, isDoneClicked: Boolean)
+        fun onDoneClicked(position: Int, isChecked: Boolean)
+        fun onNotDoneClicked(position: Int, isChecked: Boolean)
     }
 }
