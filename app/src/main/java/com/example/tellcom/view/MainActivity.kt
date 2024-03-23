@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View) {
         when (v.id) {
+
             binding.btnOrders.id -> {
                 val intent = Intent(applicationContext, OrderActivity::class.java)
                 startActivity(intent)
@@ -39,7 +40,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 startActivity(intent)
             }
             binding.btnNewOrder.id -> {
-                 val intent = Intent(applicationContext, FormOrderActivity::class.java)
+                val intent = Intent(applicationContext, FormOrderActivity::class.java)
                 startActivity(intent)
             }
             binding.btnNewScore.id -> {
