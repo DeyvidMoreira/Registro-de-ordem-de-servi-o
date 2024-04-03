@@ -13,11 +13,14 @@ interface ScoreDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert (score: ScoreModel)
 
+
+
     @Update
     fun update(score: ScoreModel)
 
     @Query ( "SELECT * FROM score_database")
     fun getAllScore(): LiveData<List<ScoreModel>>
+
 
     @Query("DELETE FROM score_database")
     suspend fun deleteAll()

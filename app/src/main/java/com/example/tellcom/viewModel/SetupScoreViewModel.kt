@@ -17,10 +17,18 @@ class SetupScoreViewModel(application: Application) : AndroidViewModel(applicati
 
     private val scoreDao = ScoreDatabase.getDatabase(application).scoreDao()
     private val _isScoreSaved = MutableLiveData<Boolean>()
-
     val isScoreSaved: LiveData<Boolean> get() = _isScoreSaved
 
-    fun saveScore(jobName: String, singlePoints: String, metaPoints: String) {
+    //LiveData para o currentScore
+    private var _currentscore = MutableLiveData<Double>()
+    val currentScore: LiveData<Double> get() = _currentscore
+
+    init {
+        // Inicializa o currentScore
+        _currentscore.value = 0.0
+    }
+
+    fun saveScore(jobName: String, singlePoints: Double, metaPoints: Double) {
         val score = ScoreModel(
             jobName = jobName,
             singlePoints = singlePoints,
@@ -44,17 +52,5 @@ class SetupScoreViewModel(application: Application) : AndroidViewModel(applicati
         return scoreDao.getAllScore()
     }
 
-    fun updateScore(score: ScoreModel) {
-        GlobalScope.launch(Dispatchers.IO) {
-            try {
-                scoreDao.update(score)
-            } catch (e: Exception) {
-                Log.e(
-                    "${Constants.NOTIFICATION.UPDATE_SCORE_ERROR_TAG}",
-                    "${Constants.NOTIFICATION.UPDATE_SCORE_ERROR_MESSAGE} ${e.message}"
-                )
-            }
-        }
-    }
 
 }

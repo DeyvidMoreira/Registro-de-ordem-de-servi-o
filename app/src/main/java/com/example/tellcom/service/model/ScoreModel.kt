@@ -9,9 +9,9 @@ data class ScoreModel (
     @PrimaryKey(autoGenerate = true)
     val id:Int = 0,
     val jobName: String,
-    val singlePoints: String,
-    val metaPoints: String,
-
+    val singlePoints: Double,
+    val metaPoints: Double,
+    val currentScore: Int = 0
 )
 
 

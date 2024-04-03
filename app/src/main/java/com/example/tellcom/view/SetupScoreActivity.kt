@@ -13,43 +13,55 @@ import com.example.tellcom.service.constants.Constants
 import com.example.tellcom.viewModel.SetupScoreViewModel
 import kotlinx.coroutines.launch
 
+/**
+ * Activity para configurar o Score.
+ */
 class SetupScoreActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var binding: ActivitySetupScoreBinding
     private lateinit var viewModel: SetupScoreViewModel
 
     var jobName: String = ""
-    var singlePoints: String = ""
-    var metaScore: String = ""
+    var singlePoints: Double = 0.0
+    var metaScore: Double = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySetupScoreBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //iniciando a viewModel
+        // Iniciando a viewModel
         viewModel = ViewModelProvider(this).get(SetupScoreViewModel::class.java)
 
         setListeners()
         observers()
-
     }
 
     private fun fillingInFields() {
+        val jobName = binding.etJobName.text.toString().trim()
+        val singlePointsText = binding.etScoreValue.text.toString().trim()
+        val metaScoreText = binding.etMetaScore.text.toString().trim()
 
-        jobName = binding.etJobName.text.toString()
-        singlePoints = binding.etScoreValue.text.toString()
-        metaScore = binding.etMetaScore.text.toString()
-
-        if (jobName.isEmpty() || singlePoints.isEmpty() || metaScore.isEmpty()) {
+        if (jobName.isEmpty() || singlePointsText.isEmpty() || metaScoreText.isEmpty()) {
             Toast.makeText(
                 this,
                 "${Constants.NOTIFICATION.FILLING_IN_FILDS_NOTIFICATION}",
                 Toast.LENGTH_SHORT
             ).show()
         } else {
-            viewModel.viewModelScope.launch {
-                viewModel.saveScore(jobName, singlePoints, metaScore)
+            try {
+                val singlePoints = singlePointsText.toDouble()
+                val metaScore = metaScoreText.toDouble()
+
+                viewModel.viewModelScope.launch {
+                    viewModel.saveScore(jobName, singlePoints, metaScore)
+                }
+            } catch (e: NumberFormatException) {
+                Toast.makeText(
+                    this,
+                    "Erro ao converter valor para número.",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
@@ -89,5 +101,4 @@ class SetupScoreActivity : AppCompatActivity(), View.OnClickListener {
             }
         })
     }
-
 }
