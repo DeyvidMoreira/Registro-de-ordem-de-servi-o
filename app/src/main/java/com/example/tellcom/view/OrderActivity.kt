@@ -38,7 +38,8 @@ class OrderActivity : AppCompatActivity(), View.OnClickListener, OrderAdapter.Or
     override fun onClick(v: View) {
         when (v.id) {
             binding.fabAddOrder.id -> {
-                val intent = Intent(applicationContext, FormOrderActivity::class.java)
+                // val intent = Intent(applicationContext, FormOrderActivity::class.java)
+                val intent = Intent(applicationContext, ScoreActivity::class.java)
                 startActivity(intent)
             }
         }

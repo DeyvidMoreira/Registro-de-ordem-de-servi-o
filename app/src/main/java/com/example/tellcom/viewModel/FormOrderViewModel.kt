@@ -28,11 +28,11 @@ class FormOrderViewModel(application: Application) : AndroidViewModel(applicatio
         )
         GlobalScope.launch(Dispatchers.IO) {
             try {
-                orderDao.insert(order)
+                orderDao.insertOrders(order)
                 _isOrderSaved.postValue(true)
             } catch (e: Exception) {
                 try {
-                    orderDao.insert(order)
+                    orderDao.insertOrders(order)
                     _isOrderSaved.postValue(true)
                 } catch (e: Exception) {
                     _isOrderSaved.postValue(false)
@@ -48,7 +48,7 @@ class FormOrderViewModel(application: Application) : AndroidViewModel(applicatio
     fun updateOrder(order: OrderModel){
         GlobalScope.launch (Dispatchers.IO) {
             try {
-                orderDao.update(order)
+                orderDao.updateOrders(order)
             }catch (e:Exception){
                 Log.e("${Constants.NOTIFICATION.UPDATE_ORDER_ERROR_TAG}",
                     "${Constants.NOTIFICATION.UPDATE_ORDER_ERROR_MESSAGE} ${e.message}")
