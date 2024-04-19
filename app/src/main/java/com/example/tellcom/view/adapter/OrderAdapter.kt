@@ -8,8 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.telecom.R
 import com.example.telecom.databinding.RowOrderBinding
 import com.example.tellcom.service.model.OrderModel
+import com.example.tellcom.view.OrderActivity
 
-class OrderAdapter(private var orders: List<OrderModel>, private val listener: OrderItemListener) :
+class OrderAdapter(private var orders: List<OrderModel>, private val listener: OrderActivity) :
     RecyclerView.Adapter<OrderAdapter.OrderViewHolder>() {
 
 
@@ -41,17 +42,15 @@ class OrderAdapter(private var orders: List<OrderModel>, private val listener: O
             binding.cbDone.setOnCheckedChangeListener(null)
             binding.cbDone.isChecked = order.status == 1
             binding.cbDone.setOnCheckedChangeListener { _, isChecked ->
-                // Marcar como Feito (1) ou Andamento (3)
-                order.status = if (isChecked) 1 else 3
+                listener.onDoneClicked(position, isChecked)
                 notifyDataSetChanged()
             }
 
-            //Configurar listener para cdBroken
+            //Configurar listener para cbBroken
             binding.cbBroken.setOnCheckedChangeListener(null)
             binding.cbBroken.isChecked = order.status == 2
             binding.cbBroken.setOnCheckedChangeListener { _, isChecked ->
-                order.status = if (isChecked) 2 else 3
-
+                listener.onNotDoneClicked(position, isChecked)
                 notifyDataSetChanged()
             }
 
@@ -95,6 +94,11 @@ class OrderAdapter(private var orders: List<OrderModel>, private val listener: O
         fun onDoneClicked(position: Int, isChecked: Boolean)
         fun onNotDoneClicked(position: Int, isChecked: Boolean)
 
+    }
+
+    //Interface que a Score usará para para atuliazar a pontuação
+    interface ScoreItemListener {
+        fun updateCurrentScore(position: Int)
     }
 
 }

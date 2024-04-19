@@ -11,7 +11,7 @@ data class ScoreModel (
     val jobName: String,
     val singlePoints: Double,
     val metaPoints: Double,
-    val currentScore: Int = 0
+    val currentScore: Double = 0.0
 )
 
 

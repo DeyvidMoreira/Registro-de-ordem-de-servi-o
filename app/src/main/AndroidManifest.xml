@@ -13,6 +13,9 @@
         android:theme="@style/Theme.TellCom"
         tools:targetApi="31">
         <activity
+            android:name="com.example.tellcom.view.ScoreActivity"
+            android:exported="false" />
+        <activity
             android:name="com.example.tellcom.view.OrderActivity"
             android:exported="false" />
         <activity
@@ -28,13 +31,11 @@
             android:name="com.example.tellcom.view.LoginActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.tellcom.view.ScoreActivity"
-            android:exported="false" />
-        <activity
             android:name="com.example.tellcom.view.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

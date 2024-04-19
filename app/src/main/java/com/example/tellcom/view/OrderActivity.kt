@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.telecom.databinding.ActivityOrderBinding
@@ -38,8 +37,7 @@ class OrderActivity : AppCompatActivity(), View.OnClickListener, OrderAdapter.Or
     override fun onClick(v: View) {
         when (v.id) {
             binding.fabAddOrder.id -> {
-                // val intent = Intent(applicationContext, FormOrderActivity::class.java)
-                val intent = Intent(applicationContext, ScoreActivity::class.java)
+                val intent = Intent(applicationContext, FormOrderActivity::class.java)
                 startActivity(intent)
             }
         }
@@ -49,8 +47,14 @@ class OrderActivity : AppCompatActivity(), View.OnClickListener, OrderAdapter.Or
     override fun onDoneClicked(position: Int, isChecked: Boolean) {
         val order = orderAdapter.getOrderAtPosition(position)
         order?.let {
-            it.status = 1
-            orderAdapter.notifyItemChanged(position)
+
+            if (isChecked) {
+                it.status = 1
+                orderAdapter.notifyItemChanged(position)
+            } else {
+                it.status = 3
+            }
+            orderViewModel.updateOrder(it)
         }
 
     }
@@ -59,17 +63,14 @@ class OrderActivity : AppCompatActivity(), View.OnClickListener, OrderAdapter.Or
     override fun onNotDoneClicked(position: Int, isChecked: Boolean) {
         val order = orderAdapter.getOrderAtPosition(position)
         order?.let {
-            it.status = 2
-            orderAdapter.notifyItemChanged(position)
-            updateScoreActivity(totalScore)
+            if (isChecked) {
+                it.status = 2
+                orderAdapter.notifyItemChanged(position)
+            } else {
+                it.status = 3
+            }
+            orderViewModel.updateOrder(it)
         }
-    }
-
-    // Método para atualizar a ScoreActivity com o novo total
-    private fun updateScoreActivity(score: Double) {
-        val intent = Intent(this, ScoreActivity::class.java)
-        intent.putExtra("totalScore", score)
-        startActivity(intent)
     }
 
     // Método para mostrar ou esconder o texto de lista vazia
