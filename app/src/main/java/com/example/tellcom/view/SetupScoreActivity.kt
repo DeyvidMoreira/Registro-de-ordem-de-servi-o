@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.telecom.databinding.ActivitySetupScoreBinding
@@ -21,18 +20,23 @@ class SetupScoreActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivitySetupScoreBinding
     private lateinit var viewModel: SetupScoreViewModel
 
-    var jobName: String = ""
-    var singlePoints: Double = 0.0
-    var metaScore: Double = 0.0
+    private var jobName: String = ""
+    private var singlePoints: Double = 0.0
+    private var metaScore: Double = 0.0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySetupScoreBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Iniciando a viewModel
-        viewModel = ViewModelProvider(this).get(SetupScoreViewModel::class.java)
+        // Inicialize a classe NOTIFICATION com o contexto desta atividade
+        Constants.NOTIFICATION.initialize(this)
 
+        // Iniciando a viewModel
+
+        // Iniciando a viewModel
+        viewModel = ViewModelProvider(this)[SetupScoreViewModel::class.java]
         setListeners()
         observers()
     }
@@ -45,7 +49,7 @@ class SetupScoreActivity : AppCompatActivity(), View.OnClickListener {
         if (jobName.isEmpty() || singlePointsText.isEmpty() || metaScoreText.isEmpty()) {
             Toast.makeText(
                 this,
-                "${Constants.NOTIFICATION.FILLING_IN_FILDS_NOTIFICATION}",
+                Constants.NOTIFICATION.FILLING_IN_FILDS_NOTIFICATION,
                 Toast.LENGTH_SHORT
             ).show()
         } else {
@@ -79,11 +83,11 @@ class SetupScoreActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun observers() {
-        viewModel.isScoreSaved.observe(this, Observer { isSaved ->
+        viewModel.isScoreSaved.observe(this) { isSaved ->
             if (isSaved) {
                 Toast.makeText(
                     this,
-                    "${Constants.NOTIFICATION.SAVED_SCORE}",
+                    Constants.NOTIFICATION.SAVED_SCORE,
                     Toast.LENGTH_SHORT
                 ).show()
                 val intent = Intent(applicationContext, ScoreActivity::class.java)
@@ -95,10 +99,10 @@ class SetupScoreActivity : AppCompatActivity(), View.OnClickListener {
             } else {
                 Toast.makeText(
                     this,
-                    "${Constants.NOTIFICATION.NOT_SAVED_SCORE}",
+                    Constants.NOTIFICATION.NOT_SAVED_SCORE,
                     Toast.LENGTH_SHORT
                 ).show()
             }
-        })
+        }
     }
 }

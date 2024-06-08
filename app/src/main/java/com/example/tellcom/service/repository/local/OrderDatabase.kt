@@ -9,7 +9,7 @@ import com.example.tellcom.service.model.OrderModel
 import com.example.tellcom.service.model.ScoreModel
 import com.example.tellcom.service.repository.dao.OrderDao
 
-@Database(entities = [OrderModel::class, ScoreModel::class], version = Constants.DATABASE.VERSION_ORDER_DATABASE)
+@Database(entities = [OrderModel::class, ScoreModel::class ], version = Constants.DATABASE.VERSION_ORDER_DATABASE)
 abstract class OrderDatabase : RoomDatabase() {
 
     abstract fun orderDao(): OrderDao

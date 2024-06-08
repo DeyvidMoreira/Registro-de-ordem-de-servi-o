@@ -5,7 +5,6 @@ import androidx.room.PrimaryKey
 import com.example.tellcom.service.constants.Constants
 
 
-
 @Entity(tableName = Constants.DATABASE.DATABASE_ORDER_NAME)
 data class OrderModel(
     @PrimaryKey(autoGenerate = true)
@@ -14,5 +13,4 @@ data class OrderModel(
     val clientName: String,
     val dropValue: String,
     var status: Int = 3
-
 )

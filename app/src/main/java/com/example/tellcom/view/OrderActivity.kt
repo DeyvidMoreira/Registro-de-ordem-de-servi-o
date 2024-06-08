@@ -15,8 +15,6 @@ class OrderActivity : AppCompatActivity(), View.OnClickListener, OrderAdapter.Or
     private lateinit var orderAdapter: OrderAdapter
     private val orderViewModel: FormOrderViewModel by viewModels()
 
-    private var totalScore: Double = 0.0
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityOrderBinding.inflate(layoutInflater)
@@ -82,12 +80,12 @@ class OrderActivity : AppCompatActivity(), View.OnClickListener, OrderAdapter.Or
     // Método para observar as mudanças na lista de pedidos no ViewModel
     private fun observe() {
         // Observa as mudanças na lista de pedidos no ViewModel
-        orderViewModel.allOrders.observe(this, { orders ->
+        orderViewModel.allOrders.observe(this) { orders ->
             orders?.let {
                 orderAdapter.setData(it)
                 noneListText()
             }
-        })
+        }
     }
 
     // Método para definir os listeners

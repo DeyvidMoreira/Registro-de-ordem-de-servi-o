@@ -1,5 +1,6 @@
 package com.example.tellcom.view.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,9 +18,10 @@ class OrderAdapter(private var orders: List<OrderModel>, private val listener: O
     // ViewHolder para OrderModel
     inner class OrderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        internal val binding = RowOrderBinding.bind(itemView)
+        private val binding = RowOrderBinding.bind(itemView)
 
         // Método para ligar os dados de OrderModel aos elementos de UI
+        @SuppressLint("NotifyDataSetChanged")
         fun bindOrder(order: OrderModel, position: Int) {
             binding.tvProtocolNumer.text = order.protocolNumber
             binding.tvOrderName.text = order.clientName
@@ -76,6 +78,7 @@ class OrderAdapter(private var orders: List<OrderModel>, private val listener: O
     }
 
     // Método para atualizar a lista de pedidos
+    @SuppressLint("NotifyDataSetChanged")
     fun setData(newList: List<OrderModel>) {
         orders = newList
         notifyDataSetChanged()
@@ -83,7 +86,7 @@ class OrderAdapter(private var orders: List<OrderModel>, private val listener: O
 
     // Método para obter um pedido em uma determinada posição
     fun getOrderAtPosition(position: Int): OrderModel? {
-        if (position in 0 until orders.size) {
+        if (position in orders.indices) {
             return orders[position]
         }
         return null
@@ -94,11 +97,6 @@ class OrderAdapter(private var orders: List<OrderModel>, private val listener: O
         fun onDoneClicked(position: Int, isChecked: Boolean)
         fun onNotDoneClicked(position: Int, isChecked: Boolean)
 
-    }
-
-    //Interface que a Score usará para para atuliazar a pontuação
-    interface ScoreItemListener {
-        fun updateCurrentScore(position: Int)
     }
 
 }

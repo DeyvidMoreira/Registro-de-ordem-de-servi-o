@@ -39,4 +39,24 @@
     <string name="update_error_tag">UpdateError</string>
     <string name="update_error_message">Update Error</string>
 
+    //Constants Strings
+    <string name="filling_in_filds">Preencha todos os campos!</string>
+    <string name="save_order">Ordem salva com sucesso!</string>
+    <string name="save_score">Score salvo com sucesso!</string>
+    <string name="save_order_fail">Falha ao salvar ordem!</string>
+    <string name="save_score_fail">Falha ao salvar o score!</string>
+    <string name="invalid_protocol_number">Número de Protocolo invalido!</string>
+    <string name="protocol_number_requeried">O número do protocolo deve ter exatamente 8 caracteres</string>
+    <string name="save_order_error_tag">Save error</string>
+    <string name="save_order_error_message">Falha ao salvar a ordem!</string>
+    <string name="save_score_error_tag">Update error</string>
+    <string name="save_score_error_message">Falha ao atualizar as ordens!</string>
+    <string name="update_error_order_tag">Update order error</string>
+    <string name="update_error_order_message">Falha ao atualizar a ordem!</string>
+    <string name="number_format_error">Erro ao converter valor para número.</string>
+    <string name="recalculate_socre_error_tag">Erro do Cálculo .</string>
+    <string name="recalculate_socre_error_message">Erro ao calcular o score!.</string>
+    <string name="update_error_score_tag">Update order error</string>
+    <string name="update_error_score_message">Falha ao atualizar o score!</string>
+
 </resources>
