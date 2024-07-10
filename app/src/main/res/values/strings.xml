@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">TellCom</string>
 
+    //Login
     <string name="email">E-mail</string>
     <string name="password">Senha</string>
     <string name="login_goole">Entrar com Conta Google</string>
@@ -8,8 +9,8 @@
     <string name="forget_password">Esqueci a senha</string>
     <string name="register">Cadastrar-se</string>
 
+    //Score
     <string name="provider_name">Nome do Provedor:</string>
-
     <string name="score">Score</string>
     <string name="job_name">Provedor</string>
     <string name="current_score">0</string>
@@ -20,6 +21,7 @@
     <string name="meta">Meta:</string>
     <string name="points">Pontos:</string>
 
+    //Save Order
     <string name="btn_save">Salvar</string>
     <string name="no_orders">Você não tem nenhuma Ordem de Serviço Registrada!</string>
     <string name="from_order_title">Nova Ordem de serviço</string>
@@ -29,11 +31,13 @@
     <string name="from_order_protocol_number">Digite o número do protocolo:</string>
     <string name="from_order_city">Digite a cidade:</string>
 
+    //Row Order
     <string name="protocol_name">Protocolo: </string>
     <string name="client_name">Cliente: </string>
     <string name="drop_meters">Drop usado: </string>
     <string name="drop_meters_word">m</string>
 
+    //DB
     <string name="save_error_tag">SaveError</string>
     <string name="save_error_message">Save Error</string>
     <string name="update_error_tag">UpdateError</string>
@@ -58,5 +62,13 @@
     <string name="recalculate_socre_error_message">Erro ao calcular o score!.</string>
     <string name="update_error_score_tag">Update order error</string>
     <string name="update_error_score_message">Falha ao atualizar o score!</string>
+    <string name="delete_order_error_tag">erro ao deletar</string>
+    <string name="delete_order_error_message">Não foi possível deletar a ordem de serviço!</string>
+
+    //Alert Dialog
+    <string name="alert_dialog_title">Confirmação</string>
+    <string name="alert_dialog_message">Deseja realmente excluir esse pedido?</string>
+    <string name="alert_dialog_positive">Sim</string>
+    <string name="alert_dialog_negative">Não</string>
 
 </resources>

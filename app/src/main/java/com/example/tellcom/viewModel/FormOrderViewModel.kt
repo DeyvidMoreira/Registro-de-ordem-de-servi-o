@@ -53,6 +53,20 @@ class FormOrderViewModel(application: Application) : AndroidViewModel(applicatio
         }
     }
 
+    //Função para excluir item da lista
+    fun deleteOrder(order: OrderModel){
+        viewModelScope.launch (Dispatchers.IO){
+            try {
+                orderDao.deleteOrderById(order.id)
+            }catch (e:Exception){
+                Log.e(
+                    Constants.NOTIFICATION.DELETE_ORDER_ERROR_TAG,
+                    "${Constants.NOTIFICATION.DELETE_ORDER_ERROR_MESSAGE}"
+                )
+            }
+        }
+    }
+
     //Função para atualizar a lista de ordens
     fun updateOrder(order: OrderModel) {
         viewModelScope.launch(Dispatchers.IO) {

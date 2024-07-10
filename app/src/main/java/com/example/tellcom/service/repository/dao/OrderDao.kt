@@ -29,6 +29,9 @@ interface OrderDao {
     @Query("SELECT * FROM orders_database WHERE status = 1")
     fun getOrderdesWithStatus1(): LiveData<List<OrderModel>>
 
+    @Query("DELETE FROM orders_database WHERE id = :orderId")
+    suspend fun deleteOrderById(orderId: Int): Int
+
     @Query("DELETE FROM orders_database")
     suspend fun deleteAllOrders()
 

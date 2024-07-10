@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "TellCom"
 include(":app")
- 
+

@@ -1,12 +1,17 @@
 package com.example.tellcom.view
 
+import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.telecom.databinding.ActivityOrderBinding
+import com.example.tellcom.service.constants.Constants
+import com.example.tellcom.service.model.OrderModel
 import com.example.tellcom.view.adapter.OrderAdapter
 import com.example.tellcom.viewModel.FormOrderViewModel
 
@@ -20,6 +25,9 @@ class OrderActivity : AppCompatActivity(), View.OnClickListener, OrderAdapter.Or
         binding = ActivityOrderBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Inicialize a classe NOTIFICATION com o contexto desta atividade
+        Constants.NOTIFICATION.initialize(this)
+
         // RecyclerView Layout
         binding.rvOrders.layoutManager = LinearLayoutManager(this)
 
@@ -27,8 +35,11 @@ class OrderActivity : AppCompatActivity(), View.OnClickListener, OrderAdapter.Or
         orderAdapter = OrderAdapter(listOf(), this)
         binding.rvOrders.adapter = orderAdapter
 
-        observe()
+        //Adiciona o IteTouchHelper à RecyclerView
+        val itemTouchHelper = ItemTouchHelper(swipeHandler)
+        itemTouchHelper.attachToRecyclerView(binding.rvOrders)
 
+        observe()
         onListeners()
     }
 
@@ -41,7 +52,43 @@ class OrderActivity : AppCompatActivity(), View.OnClickListener, OrderAdapter.Or
         }
     }
 
-    // Método chamado quando a checkbox "Done" é clicada
+    //Método para movimentação do swipe
+    private val swipeHandler = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+        override fun onMove(
+            recyclerView: RecyclerView,
+            viewHolder: RecyclerView.ViewHolder,
+            target: RecyclerView.ViewHolder
+        ): Boolean {
+            return false // Não precisamos implementar movimentação
+        }
+
+        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+            val position = viewHolder.adapterPosition
+            val order = orderAdapter.getOrderAtPosition(position)
+            order?.let {
+                showDeleteConfirmationDialog(it, position)
+            }
+        }
+    }
+
+    //Alert Dialog
+    private fun showDeleteConfirmationDialog(order: OrderModel, position: Int) {
+        AlertDialog.Builder(this)
+            .setTitle(Constants.NOTIFICATION.ALERT_DIALOG_TITLE)
+            .setMessage(Constants.NOTIFICATION.ALERT_DIALOG_MESSAGE)
+            .setPositiveButton(Constants.NOTIFICATION.ALERT_DIALOG_POSITIVE) { _, _ ->
+                orderViewModel.deleteOrder(order)
+                orderAdapter.notifyItemRemoved(position)
+            }
+            .setNegativeButton(Constants.NOTIFICATION.ALERT_DIALOG_NEGATIVE) { dialog, _ ->
+                orderAdapter.notifyItemChanged(position)
+                dialog.dismiss()
+            }
+            .create()
+            .show()
+    }
+
+        // Método chamado quando a checkbox "Done" é clicada
     override fun onDoneClicked(position: Int, isChecked: Boolean) {
         val order = orderAdapter.getOrderAtPosition(position)
         order?.let {
