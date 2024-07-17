@@ -5,31 +5,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="6dp"
-    tools:context="com.example.tellcom.view.OrderActivity">
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_orders"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:visibility="gone"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+    tools:context="com.example.tellcom.view.activitys.OrderActivity">
 
-    <TextView
-        android:id="@+id/tv_no_order"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/no_orders"
-        android:textSize="22sp"
-        android:textColor="@color/black"
-        android:textAlignment="center"
-        android:textStyle="italic"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+   <RelativeLayout
+       android:id="@+id/ll_rv_list"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintBottom_toTopOf="@id/fab_add_order"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintEnd_toEndOf="parent">
+       <androidx.recyclerview.widget.RecyclerView
+           android:id="@+id/rv_orders"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:padding="8dp"/>
+
+       <TextView
+           android:id="@+id/tv_no_order"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_centerHorizontal="true"
+           android:layout_centerVertical="true"
+           android:text="@string/no_orders"
+           android:textSize="22sp"
+           android:textColor="@color/black"
+           android:textAlignment="center"
+           android:textStyle="italic"
+           android:visibility="visible"/>
+
+   </RelativeLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add_order"
@@ -40,6 +45,7 @@
         app:maxImageSize="40dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
+        android:contentDescription="@string/new_order"
         android:src="@drawable/icon_add_order_24"
         android:backgroundTint="@color/white"/>
 

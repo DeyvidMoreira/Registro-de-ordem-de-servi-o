@@ -1,4 +1,4 @@
-package com.example.tellcom.view
+package com.example.tellcom.view.activitys
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +20,7 @@ class FormOrderActivity : AppCompatActivity(), View.OnClickListener {
     private var protocolName: String = ""
     private var protocolNumber: String = ""
     private var dropValue: String = ""
+    private var date: Long = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,7 +66,8 @@ class FormOrderActivity : AppCompatActivity(), View.OnClickListener {
                     viewModel.saveOrder(
                         protocolNumber,
                         protocolName,
-                        dropValue
+                        dropValue,
+                        date
                     )
                 }
             } else {

@@ -13,25 +13,31 @@
         android:theme="@style/Theme.TellCom"
         tools:targetApi="31">
         <activity
-            android:name="com.example.tellcom.view.ScoreActivity"
+            android:name="com.example.tellcom.view.activitys.DateOrderActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.tellcom.view.OrderActivity"
+            android:name="com.example.tellcom.view.activitys.WorkRecordActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.tellcom.view.SetupScoreActivity"
+            android:name="com.example.tellcom.view.activitys.ScoreActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.tellcom.view.RoutesActivity"
+            android:name="com.example.tellcom.view.activitys.OrderActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.tellcom.view.FormOrderActivity"
+            android:name="com.example.tellcom.view.activitys.SetupScoreActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.tellcom.view.LoginActivity"
+            android:name="com.example.tellcom.view.activitys.RoutesActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.tellcom.view.MainActivity"
+            android:name="com.example.tellcom.view.activitys.FormOrderActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.tellcom.view.activitys.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.tellcom.view.activitys.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

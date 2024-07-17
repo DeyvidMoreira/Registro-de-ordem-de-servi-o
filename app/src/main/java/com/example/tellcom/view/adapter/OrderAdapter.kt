@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.telecom.R
 import com.example.telecom.databinding.RowOrderBinding
 import com.example.tellcom.service.model.OrderModel
-import com.example.tellcom.view.OrderActivity
+import com.example.tellcom.view.activitys.OrderActivity
 
 class OrderAdapter(private var orders: List<OrderModel>, private val listener: OrderActivity) :
     RecyclerView.Adapter<OrderAdapter.OrderViewHolder>() {

@@ -10,13 +10,13 @@ import androidx.lifecycle.viewModelScope
 import com.example.tellcom.service.constants.Constants
 import com.example.tellcom.service.model.OrderModel
 import com.example.tellcom.service.model.ScoreModel
-import com.example.tellcom.service.repository.local.OrderDatabase
+import com.example.tellcom.service.repository.local.AppDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class SetupScoreViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val orderDao = OrderDatabase.getDatabase(application).orderDao()
+    private val appDao = AppDatabase.getDatabase(application).appDao()
     private val _isScoreSaved = MutableLiveData<Boolean>()
     val isScoreSaved: LiveData<Boolean> get() = _isScoreSaved
 
@@ -25,8 +25,8 @@ class SetupScoreViewModel(application: Application) : AndroidViewModel(applicati
     private var _currentscore = MutableLiveData<Double>()
     val currentScore: LiveData<Double> get() = _currentscore
 
-    private val allScores: LiveData<List<ScoreModel>> = orderDao.getAllScore()
-    private val allOrders: LiveData<List<OrderModel>> = orderDao.getAllOrders()
+    private val allScores: LiveData<List<ScoreModel>> = appDao.getAllScore()
+    private val allOrders: LiveData<List<OrderModel>> = appDao.getAllOrders()
 
     //MediatorLiveData para combinar o score e as ordens
     private val _combinedData = MediatorLiveData<Pair<List<ScoreModel>?, List<OrderModel>?>>()
@@ -55,7 +55,7 @@ class SetupScoreViewModel(application: Application) : AndroidViewModel(applicati
         )
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                orderDao.insertScore(score)
+                appDao.insertScore(score)
                 _isScoreSaved.postValue(true)
             } catch (e: Exception) {
                 _isScoreSaved.postValue(false)

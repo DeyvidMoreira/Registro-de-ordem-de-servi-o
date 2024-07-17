@@ -7,22 +7,22 @@ import androidx.room.RoomDatabase
 import com.example.tellcom.service.constants.Constants
 import com.example.tellcom.service.model.OrderModel
 import com.example.tellcom.service.model.ScoreModel
-import com.example.tellcom.service.repository.dao.OrderDao
+import com.example.tellcom.service.repository.dao.AppDao
 
 @Database(entities = [OrderModel::class, ScoreModel::class ], version = Constants.DATABASE.VERSION_ORDER_DATABASE)
-abstract class OrderDatabase : RoomDatabase() {
+abstract class AppDatabase : RoomDatabase() {
 
-    abstract fun orderDao(): OrderDao
+    abstract fun appDao(): AppDao
 
     companion object {
         @Volatile
-        private var INSTANCE: OrderDatabase? = null
+        private var INSTANCE: AppDatabase? = null
 
-        fun getDatabase(context: Context): OrderDatabase {
+        fun getDatabase(context: Context): AppDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    OrderDatabase::class.java,
+                    AppDatabase::class.java,
                     Constants.DATABASE.DATABASE_ORDER_NAME
                 ).fallbackToDestructiveMigration()
                     .build()

@@ -6,13 +6,17 @@ import com.example.telecom.R
 class Constants private constructor() {
 
     object DATABASE {
-        const val VERSION_ORDER_DATABASE = 30
+        const val VERSION_ORDER_DATABASE = 31
         const val DATABASE_ORDER_NAME = "orders_database"
         const val DATABASE_SCORE_NAME = "score_database"
     }
 
+    object DATE {
+        const val FORMAT_DATE = "dd-MM-yyyy"
+    }
+
     object NOTIFICATION {
-        // Para acessar as strings, precisamos de um contexto
+        // Para acessar as strings, precisa de um contexto
         lateinit var context: Context
 
         // Método para inicializar o contexto
@@ -23,6 +27,8 @@ class Constants private constructor() {
         // Constantes para as mensagens
         val FILLING_IN_FILDS_NOTIFICATION: String
             get() = context.getString(R.string.filling_in_filds)
+        val FILLING_IN_FILDS_TOAST_ERROR
+            get() = context.getString(R.string.filling_in_filds_toast_error)
         val SAVED_ORDER: String
             get() = context.getString(R.string.save_order)
         val SAVED_SCORE: String

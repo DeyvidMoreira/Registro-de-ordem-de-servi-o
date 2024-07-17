@@ -9,6 +9,11 @@
     <string name="forget_password">Esqueci a senha</string>
     <string name="register">Cadastrar-se</string>
 
+    //Icons menu
+    <string name="orders">Ordens de Serviço</string>
+    <string name="new_order">Nova Ordem de Serviço</string>
+    <string name="calendar">Calendario de OS</string>
+
     //Score
     <string name="provider_name">Nome do Provedor:</string>
     <string name="score">Score</string>
@@ -70,5 +75,6 @@
     <string name="alert_dialog_message">Deseja realmente excluir esse pedido?</string>
     <string name="alert_dialog_positive">Sim</string>
     <string name="alert_dialog_negative">Não</string>
+    <string name="filling_in_filds_toast_error">Erro ao converter valor para número.</string>
 
 </resources>

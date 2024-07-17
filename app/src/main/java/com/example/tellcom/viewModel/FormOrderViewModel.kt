@@ -8,16 +8,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.tellcom.service.constants.Constants
 import com.example.tellcom.service.model.OrderModel
-import com.example.tellcom.service.repository.local.OrderDatabase
+import com.example.tellcom.service.repository.local.AppDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlin.Exception
 
 class FormOrderViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val orderDao = OrderDatabase.getDatabase(application).orderDao()
+    private val appDao = AppDatabase.getDatabase(application).appDao()
     private val _isOrderSaved = MutableLiveData<Boolean>()
-    val allOrders: LiveData<List<OrderModel>> = orderDao.getAllOrders()
+    val allOrders: LiveData<List<OrderModel>> = appDao.getAllOrders()
     val isOrderSaved: LiveData<Boolean> get() = _isOrderSaved
 
     //LiveData para observar o evento de atualização da ordem
@@ -25,21 +25,17 @@ class FormOrderViewModel(application: Application) : AndroidViewModel(applicatio
 
     //Função para salvar os detalhes das OS
 
-    fun saveOrder(protocolNumber: String, clientName: String, dropValue: String) {
-        val order = OrderModel(
-            protocolNumber = protocolNumber,
-            clientName = clientName,
-            dropValue = dropValue
-        )
+    fun saveOrder(protocolNumber: String, clientName: String, dropValue: String, date:Long) {
+        val order = OrderModel(protocolNumber = protocolNumber, clientName = clientName, dropValue = dropValue, date = date)
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                orderDao.insertOrders(order)
+                appDao.insertOrders(order)
                 _isOrderSaved.postValue(true)
                 //Dispara evento de atualização
                 _orderUpdateEvent.postValue(Unit)
             } catch (e: Exception) {
                 try {
-                    orderDao.insertOrders(order)
+                    appDao.insertOrders(order)
                     _isOrderSaved.postValue(true)
                 } catch (e: Exception) {
                     _isOrderSaved.postValue(false)
@@ -57,7 +53,7 @@ class FormOrderViewModel(application: Application) : AndroidViewModel(applicatio
     fun deleteOrder(order: OrderModel){
         viewModelScope.launch (Dispatchers.IO){
             try {
-                orderDao.deleteOrderById(order.id)
+                appDao.deleteOrderById(order.id)
             }catch (e:Exception){
                 Log.e(
                     Constants.NOTIFICATION.DELETE_ORDER_ERROR_TAG,
@@ -71,7 +67,7 @@ class FormOrderViewModel(application: Application) : AndroidViewModel(applicatio
     fun updateOrder(order: OrderModel) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                orderDao.updateOrders(order)
+                appDao.updateOrders(order)
                 //Dispara evento de atualização
                 _orderUpdateEvent.postValue(Unit)
             } catch (e: Exception) {

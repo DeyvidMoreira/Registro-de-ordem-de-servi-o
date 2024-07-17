@@ -1,4 +1,4 @@
-package com.example.tellcom.view
+package com.example.tellcom.view.activitys
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -12,9 +12,6 @@ import com.example.tellcom.service.constants.Constants
 import com.example.tellcom.viewModel.SetupScoreViewModel
 import kotlinx.coroutines.launch
 
-/**
- * Activity para configurar o Score.
- */
 class SetupScoreActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var binding: ActivitySetupScoreBinding
@@ -34,9 +31,8 @@ class SetupScoreActivity : AppCompatActivity(), View.OnClickListener {
         Constants.NOTIFICATION.initialize(this)
 
         // Iniciando a viewModel
-
-        // Iniciando a viewModel
         viewModel = ViewModelProvider(this)[SetupScoreViewModel::class.java]
+
         setListeners()
         observers()
     }
@@ -63,7 +59,7 @@ class SetupScoreActivity : AppCompatActivity(), View.OnClickListener {
             } catch (e: NumberFormatException) {
                 Toast.makeText(
                     this,
-                    "Erro ao converter valor para número.",
+                    Constants.NOTIFICATION.FILLING_IN_FILDS_TOAST_ERROR,
                     Toast.LENGTH_SHORT
                 ).show()
             }

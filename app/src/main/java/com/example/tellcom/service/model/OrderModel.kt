@@ -12,5 +12,6 @@ data class OrderModel(
     val protocolNumber: String,
     val clientName: String,
     val dropValue: String,
-    var status: Int = 3
+    var status: Int = 3,
+    val date: Long
 )

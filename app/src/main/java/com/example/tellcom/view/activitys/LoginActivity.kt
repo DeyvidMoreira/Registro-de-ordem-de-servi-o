@@ -1,4 +1,4 @@
-package com.example.tellcom.view
+package com.example.tellcom.view.activitys
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

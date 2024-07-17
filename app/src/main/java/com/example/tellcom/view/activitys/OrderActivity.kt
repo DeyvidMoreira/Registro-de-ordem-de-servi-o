@@ -1,4 +1,4 @@
-package com.example.tellcom.view
+package com.example.tellcom.view.activitys
 
 import android.app.AlertDialog
 import android.content.Intent
@@ -119,7 +119,7 @@ class OrderActivity : AppCompatActivity(), View.OnClickListener, OrderAdapter.Or
     }
 
     // Método para mostrar ou esconder o texto de lista vazia
-    private fun noneListText() {
+    fun noneListText() {
         binding.tvNoOrder.visibility = if (orderAdapter.itemCount == 0) View.VISIBLE else View.GONE
         binding.rvOrders.visibility = if (orderAdapter.itemCount == 0) View.GONE else View.VISIBLE
     }
