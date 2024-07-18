@@ -8,13 +8,13 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.telecom.databinding.ActivityFormOrderBinding
-import com.example.tellcom.service.constants.Constants
+import com.example.tellcom.service.constants.ConstantsOrders
+import com.example.tellcom.service.constants.ConstantsValidation
 import com.example.tellcom.viewModel.FormOrderViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 
 class FormOrderActivity : AppCompatActivity(), View.OnClickListener {
-
     private lateinit var binding: ActivityFormOrderBinding
     private lateinit var viewModel: FormOrderViewModel
     private var protocolName: String = ""
@@ -29,14 +29,12 @@ class FormOrderActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(binding.root)
 
         // Inicialize a classe NOTIFICATION com o contexto desta atividade
-        Constants.NOTIFICATION.initialize(this)
+        ConstantsOrders.ORDERS.context = this
 
         //Inicia a viewModel
         viewModel = ViewModelProvider(this)[FormOrderViewModel::class.java]
 
-        //Eventos
         setListeners()
-        //Observador
         observers()
 
     }
@@ -51,7 +49,7 @@ class FormOrderActivity : AppCompatActivity(), View.OnClickListener {
         if (protocolName.isEmpty() || protocolNumber.isEmpty() || dropValue.isEmpty()) {
             Snackbar.make(
                 binding.root,
-                Constants.NOTIFICATION.FILLING_IN_FILDS_NOTIFICATION,
+                ConstantsValidation.VALIDATION.FILLING_IN_FILDS_NOTIFICATION,
                 Snackbar.LENGTH_LONG
             ).show()
         } else {
@@ -73,13 +71,13 @@ class FormOrderActivity : AppCompatActivity(), View.OnClickListener {
             } else {
                 if (protocolNumber.length != 8) {
                     Snackbar.make(
-                        binding.root, Constants.NOTIFICATION.PROTOCOL_NUMBER_REQUERIED,
+                        binding.root, ConstantsOrders.ORDERS.PROTOCOL_NUMBER_REQUERIED,
                         Toast.LENGTH_SHORT
                     ).show()
                 } else {
                     Snackbar.make(
                         binding.root,
-                        Constants.NOTIFICATION.INVALID_PROTOCOL_NUMBER,
+                        ConstantsOrders.ORDERS.INVALID_PROTOCOL_NUMBER,
                         Snackbar.LENGTH_SHORT
                     ).show()
                 }
@@ -95,7 +93,6 @@ class FormOrderActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-
     private fun setListeners() {
         binding.btnSaveOrder.setOnClickListener(this)
     }
@@ -106,7 +103,7 @@ class FormOrderActivity : AppCompatActivity(), View.OnClickListener {
             if (isSaved) {
                 Snackbar.make(
                     binding.root,
-                    Constants.NOTIFICATION.SAVED_ORDER,
+                    ConstantsOrders.ORDERS.SAVED_ORDER,
                     Snackbar.LENGTH_SHORT
                 ).show()
                 val intent = Intent(applicationContext, OrderActivity::class.java)
@@ -115,12 +112,11 @@ class FormOrderActivity : AppCompatActivity(), View.OnClickListener {
             } else {
                 Snackbar.make(
                     binding.root,
-                    Constants.NOTIFICATION.NOT_SAVED_ORDER,
+                    ConstantsOrders.ORDERS.NOT_SAVED_ORDER,
                     Snackbar.LENGTH_SHORT
                 ).show()
             }
         }
 
     }
-
 }

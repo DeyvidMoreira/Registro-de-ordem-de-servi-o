@@ -7,8 +7,9 @@
     tools:context="com.example.tellcom.view.activitys.FormOrderActivity">
 
     <LinearLayout
+        android:id="@+id/ll_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,13 +62,28 @@
 
         </LinearLayout>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_save_order"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/btn_save"/>
-
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/btn_save_order"
+        app:layout_constraintTop_toBottomOf="@id/ll_main"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/disquete" />
+
+    <TextView
+        app:layout_constraintTop_toBottomOf="@id/btn_save_order"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="@string/btn_save"
+        android:textStyle="italic"
+        android:textColor="@color/black"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

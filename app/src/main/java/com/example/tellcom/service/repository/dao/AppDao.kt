@@ -14,16 +14,16 @@ interface AppDao {
 
     /*** ORDERS**/
 
-        //Adiciona ordem no db
+    //Adiciona ordem no db
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertOrders (order : OrderModel)
+    fun insertOrders(order: OrderModel)
 
     //Atualiza lista de ordens salvas
     @Update
-    fun updateOrders (order: OrderModel)
+    fun updateOrders(order: OrderModel)
 
     //Busca de ordem por ID
-    @Query ("SELECT * FROM orders_database WHERE id = :orderId")
+    @Query("SELECT * FROM orders_database WHERE id = :orderId")
     suspend fun getOrderById(orderId: Int): OrderModel?
 
     //Pega todas as ordens salvas
@@ -47,17 +47,17 @@ interface AppDao {
 
     //Insere configuração de score no db
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertScore (score: ScoreModel)
+    fun insertScore(score: ScoreModel)
 
     //Atualiza o score
     @Update
     fun updateScore(score: ScoreModel)
 
     //Busca todas as configurações de score
-    @Query ( "SELECT * FROM score_database")
+    @Query("SELECT * FROM score_database")
     fun getAllScore(): LiveData<List<ScoreModel>>
 
-    //Reseta a configuração de score
+  //Reseta a configuração de score
     @Query("DELETE FROM score_database")
     suspend fun deleteAllScore()
 }

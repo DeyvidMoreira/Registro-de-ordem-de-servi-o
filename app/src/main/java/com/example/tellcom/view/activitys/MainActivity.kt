@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.telecom.databinding.ActivityMainBinding
-import com.example.tellcom.service.constants.Constants
+import com.example.tellcom.service.constants.ConstantsDate
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 val selectedDate = Calendar.getInstance()
                 selectedDate.set(selectedYear, selectedMouth, selectedDay)
                 //formatando a data igual ao database
-                val formattedDate = SimpleDateFormat(Constants.DATE.FORMAT_DATE, Locale.getDefault())
+                val formattedDate = SimpleDateFormat(ConstantsDate.DATE.FORMAT_DATE, Locale.getDefault())
                     .format(selectedDate.time)
                 openOrdersActivity(formattedDate)
             },

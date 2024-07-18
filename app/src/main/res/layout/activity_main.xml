@@ -35,7 +35,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:gravity="center">
                 <ImageView
                     android:id="@+id/ic_orders"
                     android:layout_width="@dimen/_80dp"
@@ -66,7 +67,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:gravity="center">
                 <ImageView
                     android:id="@+id/ic_new_order"
                     android:layout_width="@dimen/_80dp"
@@ -97,7 +99,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:gravity="center">
                 <ImageView
                     android:id="@+id/ic_calendar"
                     android:layout_width="@dimen/_80dp"
@@ -128,7 +131,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:gravity="center">
                 <ImageView
                     android:id="@+id/ic_score"
                     android:layout_width="@dimen/_80dp"

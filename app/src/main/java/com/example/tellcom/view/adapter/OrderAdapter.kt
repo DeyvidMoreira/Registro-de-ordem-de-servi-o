@@ -1,15 +1,15 @@
 package com.example.tellcom.view.adapter
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.telecom.R
 import com.example.telecom.databinding.RowOrderBinding
 import com.example.tellcom.service.model.OrderModel
 import com.example.tellcom.view.activitys.OrderActivity
+import com.example.tellcom.view.tools.OrderDiffCallback
 
 class OrderAdapter(private var orders: List<OrderModel>, private val listener: OrderActivity) :
     RecyclerView.Adapter<OrderAdapter.OrderViewHolder>() {
@@ -21,39 +21,34 @@ class OrderAdapter(private var orders: List<OrderModel>, private val listener: O
         private val binding = RowOrderBinding.bind(itemView)
 
         // Método para ligar os dados de OrderModel aos elementos de UI
-        @SuppressLint("NotifyDataSetChanged")
         fun bindOrder(order: OrderModel, position: Int) {
             binding.tvProtocolNumer.text = order.protocolNumber
             binding.tvOrderName.text = order.clientName
             binding.tvDropValue.text = order.dropValue
-            binding.tvDropMeasure.text = "M"
+            binding.tvDropMeasure.text = itemView.context.getString(R.string.Metros)
 
             // Definir a cor de fundo com base no status
-            when (order.status) {
-                1 -> binding.cvRowOrder.background =
-                    ContextCompat.getDrawable(itemView.context, R.color.green)
-
-                2 -> binding.cvRowOrder.background =
-                    ContextCompat.getDrawable(itemView.context, R.color.red)
-
-                else -> binding.cvRowOrder.background =
-                    ContextCompat.getDrawable(itemView.context, R.color.white)
+            val backgroundColor = when (order.status) {
+                "done" -> R.color.green
+                "broken" -> R.color.red
+                else ->R.color.white
             }
+            binding.cvRowOrder.setBackgroundResource(backgroundColor)
 
             //Configurar listener para cbDone
             binding.cbDone.setOnCheckedChangeListener(null)
-            binding.cbDone.isChecked = order.status == 1
+            binding.cbDone.isChecked = order.status == "done"
             binding.cbDone.setOnCheckedChangeListener { _, isChecked ->
                 listener.onDoneClicked(position, isChecked)
-                notifyDataSetChanged()
+                notifyItemChanged(position)
             }
 
             //Configurar listener para cbBroken
             binding.cbBroken.setOnCheckedChangeListener(null)
-            binding.cbBroken.isChecked = order.status == 2
+            binding.cbBroken.isChecked = order.status == "broken"
             binding.cbBroken.setOnCheckedChangeListener { _, isChecked ->
                 listener.onNotDoneClicked(position, isChecked)
-                notifyDataSetChanged()
+                notifyItemChanged(position)
             }
 
         }
@@ -78,18 +73,16 @@ class OrderAdapter(private var orders: List<OrderModel>, private val listener: O
     }
 
     // Método para atualizar a lista de pedidos
-    @SuppressLint("NotifyDataSetChanged")
     fun setData(newList: List<OrderModel>) {
+        val diffCallback = OrderDiffCallback(orders, newList)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
         orders = newList
-        notifyDataSetChanged()
+        diffResult.dispatchUpdatesTo(this)
     }
 
     // Método para obter um pedido em uma determinada posição
     fun getOrderAtPosition(position: Int): OrderModel? {
-        if (position in orders.indices) {
-            return orders[position]
-        }
-        return null
+        return if (position in orders.indices) return orders[position] else  null
     }
 
     // Interface que a Activity irá implementar

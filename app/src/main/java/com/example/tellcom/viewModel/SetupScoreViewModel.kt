@@ -7,7 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.tellcom.service.constants.Constants
+import com.example.tellcom.service.constants.ConstantsScore
 import com.example.tellcom.service.model.OrderModel
 import com.example.tellcom.service.model.ScoreModel
 import com.example.tellcom.service.repository.local.AppDatabase
@@ -60,8 +60,8 @@ class SetupScoreViewModel(application: Application) : AndroidViewModel(applicati
             } catch (e: Exception) {
                 _isScoreSaved.postValue(false)
                 Log.e(
-                    Constants.NOTIFICATION.SAVE_SCORE_ERROR_TAG,
-                    "${Constants.NOTIFICATION.SAVE_SCORE_ERROR_MESSAGE} ${e.message}"
+                    ConstantsScore.SCORE.SAVE_SCORE_ERROR_TAG,
+                    "${ConstantsScore.SCORE.SAVE_SCORE_ERROR_MESSAGE} ${e.message}"
                 )
             }
         }
@@ -70,7 +70,7 @@ class SetupScoreViewModel(application: Application) : AndroidViewModel(applicati
     //Função para somar e atualizar o score
     fun calculateAndUpdateSCore(orderModel: List<OrderModel>, scoreModel: ScoreModel) {
         viewModelScope.launch(Dispatchers.IO) {
-            val newScore = orderModel.filter { it.status == 1 }
+            val newScore = orderModel.filter { it.status == "done" }
                 .sumOf { scoreModel.singlePoints }
             _currentscore.postValue(newScore)
         }

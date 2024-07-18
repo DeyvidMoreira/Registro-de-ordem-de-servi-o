@@ -6,7 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.tellcom.service.constants.Constants
+import com.example.tellcom.service.constants.ConstantsOrders
 import com.example.tellcom.service.model.OrderModel
 import com.example.tellcom.service.repository.local.AppDatabase
 import kotlinx.coroutines.Dispatchers
@@ -24,9 +24,13 @@ class FormOrderViewModel(application: Application) : AndroidViewModel(applicatio
     private val _orderUpdateEvent = MutableLiveData<Unit>()
 
     //Função para salvar os detalhes das OS
-
     fun saveOrder(protocolNumber: String, clientName: String, dropValue: String, date:Long) {
-        val order = OrderModel(protocolNumber = protocolNumber, clientName = clientName, dropValue = dropValue, date = date)
+        val order = OrderModel(
+            protocolNumber = protocolNumber,
+            clientName = clientName,
+            dropValue = dropValue,
+            date = date
+        )
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 appDao.insertOrders(order)
@@ -40,8 +44,8 @@ class FormOrderViewModel(application: Application) : AndroidViewModel(applicatio
                 } catch (e: Exception) {
                     _isOrderSaved.postValue(false)
                     Log.e(
-                        Constants.NOTIFICATION.SAVE_ORDER_ERROR_TAG,
-                        "${Constants.NOTIFICATION.SAVE_ORDER_ERROR_MESSAGE} ${e.message}"
+                        ConstantsOrders.ORDERS.SAVE_ORDER_ERROR_TAG,
+                        "${ConstantsOrders.ORDERS.SAVE_ORDER_ERROR_MESSAGE} ${e.message}"
                     )
                 }
                 _isOrderSaved.postValue(false)
@@ -56,8 +60,8 @@ class FormOrderViewModel(application: Application) : AndroidViewModel(applicatio
                 appDao.deleteOrderById(order.id)
             }catch (e:Exception){
                 Log.e(
-                    Constants.NOTIFICATION.DELETE_ORDER_ERROR_TAG,
-                    "${Constants.NOTIFICATION.DELETE_ORDER_ERROR_MESSAGE}"
+                    ConstantsOrders.ORDERS.DELETE_ORDER_ERROR_TAG,
+                    ConstantsOrders.ORDERS.DELETE_ORDER_ERROR_MESSAGE
                 )
             }
         }
@@ -72,8 +76,8 @@ class FormOrderViewModel(application: Application) : AndroidViewModel(applicatio
                 _orderUpdateEvent.postValue(Unit)
             } catch (e: Exception) {
                 Log.e(
-                    Constants.NOTIFICATION.UPDATE_ORDER_ERROR_TAG,
-                    "${Constants.NOTIFICATION.UPDATE_ORDER_ERROR_MESSAGE} ${e.message}"
+                    ConstantsOrders.ORDERS.UPDATE_ORDER_ERROR_TAG,
+                    "${ConstantsOrders.ORDERS.UPDATE_ORDER_ERROR_MESSAGE} ${e.message}"
                 )
             }
         }

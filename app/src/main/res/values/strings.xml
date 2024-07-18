@@ -75,6 +75,7 @@
     <string name="alert_dialog_message">Deseja realmente excluir esse pedido?</string>
     <string name="alert_dialog_positive">Sim</string>
     <string name="alert_dialog_negative">Não</string>
-    <string name="filling_in_filds_toast_error">Erro ao converter valor para número.</string>
+    <string name="Metros">M</string>
+
 
 </resources>

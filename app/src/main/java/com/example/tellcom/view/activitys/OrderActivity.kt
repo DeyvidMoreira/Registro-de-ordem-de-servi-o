@@ -10,9 +10,11 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.telecom.databinding.ActivityOrderBinding
-import com.example.tellcom.service.constants.Constants
+import com.example.tellcom.service.constants.ConstantsDialog
+import com.example.tellcom.service.constants.ConstantsOrders
 import com.example.tellcom.service.model.OrderModel
 import com.example.tellcom.view.adapter.OrderAdapter
+import com.example.tellcom.view.tools.AlertDialogHelper
 import com.example.tellcom.viewModel.FormOrderViewModel
 
 class OrderActivity : AppCompatActivity(), View.OnClickListener, OrderAdapter.OrderItemListener {
@@ -26,7 +28,7 @@ class OrderActivity : AppCompatActivity(), View.OnClickListener, OrderAdapter.Or
         setContentView(binding.root)
 
         // Inicialize a classe NOTIFICATION com o contexto desta atividade
-        Constants.NOTIFICATION.initialize(this)
+        ConstantsDialog.DIALOG.context = this
 
         // RecyclerView Layout
         binding.rvOrders.layoutManager = LinearLayoutManager(this)
@@ -38,6 +40,8 @@ class OrderActivity : AppCompatActivity(), View.OnClickListener, OrderAdapter.Or
         //Adiciona o IteTouchHelper à RecyclerView
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
         itemTouchHelper.attachToRecyclerView(binding.rvOrders)
+
+
 
         observe()
         onListeners()
@@ -66,38 +70,28 @@ class OrderActivity : AppCompatActivity(), View.OnClickListener, OrderAdapter.Or
             val position = viewHolder.adapterPosition
             val order = orderAdapter.getOrderAtPosition(position)
             order?.let {
-                showDeleteConfirmationDialog(it, position)
+                AlertDialogHelper.showDeleteConfirmationDialog(
+                    this@OrderActivity,
+                    orderViewModel,
+                    orderAdapter,
+                    it,
+                    position
+                )
             }
         }
     }
 
-    //Alert Dialog
-    private fun showDeleteConfirmationDialog(order: OrderModel, position: Int) {
-        AlertDialog.Builder(this)
-            .setTitle(Constants.NOTIFICATION.ALERT_DIALOG_TITLE)
-            .setMessage(Constants.NOTIFICATION.ALERT_DIALOG_MESSAGE)
-            .setPositiveButton(Constants.NOTIFICATION.ALERT_DIALOG_POSITIVE) { _, _ ->
-                orderViewModel.deleteOrder(order)
-                orderAdapter.notifyItemRemoved(position)
-            }
-            .setNegativeButton(Constants.NOTIFICATION.ALERT_DIALOG_NEGATIVE) { dialog, _ ->
-                orderAdapter.notifyItemChanged(position)
-                dialog.dismiss()
-            }
-            .create()
-            .show()
-    }
 
-        // Método chamado quando a checkbox "Done" é clicada
+    // Método chamado quando a checkbox "Done" é clicada
     override fun onDoneClicked(position: Int, isChecked: Boolean) {
         val order = orderAdapter.getOrderAtPosition(position)
         order?.let {
 
             if (isChecked) {
-                it.status = 1
+                it.status = "done"
                 orderAdapter.notifyItemChanged(position)
             } else {
-                it.status = 3
+                it.status = "progress"
             }
             orderViewModel.updateOrder(it)
         }
@@ -109,10 +103,10 @@ class OrderActivity : AppCompatActivity(), View.OnClickListener, OrderAdapter.Or
         val order = orderAdapter.getOrderAtPosition(position)
         order?.let {
             if (isChecked) {
-                it.status = 2
+                it.status = "broken"
                 orderAdapter.notifyItemChanged(position)
             } else {
-                it.status = 3
+                it.status ="progress"
             }
             orderViewModel.updateOrder(it)
         }

@@ -8,7 +8,8 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.telecom.databinding.ActivitySetupScoreBinding
-import com.example.tellcom.service.constants.Constants
+import com.example.tellcom.service.constants.ConstantsScore
+import com.example.tellcom.service.constants.ConstantsValidation
 import com.example.tellcom.viewModel.SetupScoreViewModel
 import kotlinx.coroutines.launch
 
@@ -28,7 +29,7 @@ class SetupScoreActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(binding.root)
 
         // Inicialize a classe NOTIFICATION com o contexto desta atividade
-        Constants.NOTIFICATION.initialize(this)
+        ConstantsScore.SCORE.context = this
 
         // Iniciando a viewModel
         viewModel = ViewModelProvider(this)[SetupScoreViewModel::class.java]
@@ -45,7 +46,7 @@ class SetupScoreActivity : AppCompatActivity(), View.OnClickListener {
         if (jobName.isEmpty() || singlePointsText.isEmpty() || metaScoreText.isEmpty()) {
             Toast.makeText(
                 this,
-                Constants.NOTIFICATION.FILLING_IN_FILDS_NOTIFICATION,
+                ConstantsValidation.VALIDATION.FILLING_IN_FILDS_NOTIFICATION,
                 Toast.LENGTH_SHORT
             ).show()
         } else {
@@ -59,7 +60,7 @@ class SetupScoreActivity : AppCompatActivity(), View.OnClickListener {
             } catch (e: NumberFormatException) {
                 Toast.makeText(
                     this,
-                    Constants.NOTIFICATION.FILLING_IN_FILDS_TOAST_ERROR,
+                    ConstantsScore.SCORE.NUMBER_FORMAT_ERROR,
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -83,7 +84,7 @@ class SetupScoreActivity : AppCompatActivity(), View.OnClickListener {
             if (isSaved) {
                 Toast.makeText(
                     this,
-                    Constants.NOTIFICATION.SAVED_SCORE,
+                    ConstantsScore.SCORE.SAVED_SCORE,
                     Toast.LENGTH_SHORT
                 ).show()
                 val intent = Intent(applicationContext, ScoreActivity::class.java)
@@ -95,7 +96,7 @@ class SetupScoreActivity : AppCompatActivity(), View.OnClickListener {
             } else {
                 Toast.makeText(
                     this,
-                    Constants.NOTIFICATION.NOT_SAVED_SCORE,
+                    ConstantsScore.SCORE.NOT_SAVED_SCORE,
                     Toast.LENGTH_SHORT
                 ).show()
             }
